@@ -25,13 +25,57 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: -2
+      username : "",
+      password : ""
     }
 
   }
   componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+
+        this.setState({user : user.email});
+      } else {
+        this.setState({user:null});
+      }
+    });
+  }
+
+  logIn(){
+    let email = this.state.username;
+    let password = this.state.password;
+
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      // Handle Errors here.
+      console.log(error.message);
+      // ...
+    });
 
   }
+
+  register() {
+    let email = this.state.username;
+    let password = this.state.password;
+
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      console.log(error.message);
+      
+      
+    });
+
+  }
+
+  logout(){
+
+    firebase.auth().signOut().then(function() {
+      console.log('Sign-out successful.');
+    }).catch(function(error) {
+      console.log(error);
+    });
+  }
+
   render() {
 
 
@@ -47,17 +91,22 @@ export default class App extends React.Component {
           <Form>
             <Item floatingLabel>
               <Label>Username</Label>
-              <Input />
+              <Input onChangeText={username => this.setState({username : username })} />
             </Item>
             <Item floatingLabel >
               <Label>Password</Label>
-              <Input />
+              <Input onChangeText={password => this.setState({password : password })} />
             </Item>
-            <Button block last style={styles.buttons}>
+            <Button block  style={styles.buttons} onPress={() => this.logIn()}>
               <Text>Log in</Text>
             </Button>
-            <Button block last style={styles.buttons}>
+            <Button block  style={styles.buttons} onPress={() => this.register()}>
               <Text>Register</Text>
+            </Button>
+            <Text>User is {this.state.user}</Text>
+
+            <Button block danger style={styles.buttons} onPress={() => this.logout()}>
+              <Text>Logout</Text>
             </Button>
           </Form>
         </Content>
