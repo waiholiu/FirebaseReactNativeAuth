@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-
 import { StyleSheet, Text, View } from 'react-native';
-import { Container, Header, Content, Body, Title, Form, Item, Input, Label, Button } from 'native-base';
-
 import * as firebase from "firebase";
 import { createStackNavigator } from 'react-navigation';
 
@@ -16,7 +13,6 @@ var config = {
   storageBucket: "demoreactnative-4e037.appspot.com",
   messagingSenderId: "114290350786"
 };
-
 
 firebase.initializeApp(config);
 
@@ -33,8 +29,10 @@ export default class App extends React.Component {
 
   render() {
     return (
+      
 
-      <AppStackNavigator />
+        <AppStackNavigator />
+      
     );
   }
 }

@@ -90,7 +90,7 @@ export default class LoginScreen extends React.Component {
             </Button>
             <Text>User is {this.state.user}</Text>
 
-            <Button block danger style={styles.buttons} onPress={() => this.logout()}>
+            <Button block danger last style={styles.buttons} onPress={() => this.logout()}>
               <Text>Logout</Text>
             </Button>
           </Form>
