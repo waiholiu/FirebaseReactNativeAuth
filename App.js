@@ -4,6 +4,7 @@ import * as firebase from "firebase";
 import { createStackNavigator } from 'react-navigation';
 
 import LoginScreen from './screens/LoginScreen';
+import HomeScreen from './screens/HomeScreen';
 
 var config = {
   apiKey: "AIzaSyBwD6srsoYzWSUiZaoNd4HVZHtkc-OG_8w",
@@ -38,7 +39,7 @@ export default class App extends React.Component {
 }
 
 const AppStackNavigator = createStackNavigator({
-  Login: LoginScreen
-
+  Login: LoginScreen,
+  Home : HomeScreen
 })
 
