@@ -10,8 +10,8 @@ export default class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username : "",
-      password : ""
+      username: "",
+      password: ""
     }
 
   }
@@ -19,14 +19,18 @@ export default class LoginScreen extends React.Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
 
-        this.setState({user : user.email});
+        this.setState({ user: user.email });
       } else {
-        this.setState({user:null});
+        this.setState({ user: null });
       }
     });
   }
 
-  async logIn(){
+  componentWillUnmount() {
+    this.isCancelled = true;
+  }
+
+  async logIn() {
     let email = this.state.username;
     let password = this.state.password;
 
@@ -35,15 +39,15 @@ export default class LoginScreen extends React.Component {
 
         // console.log(res);
         // await AsyncStorage.setItem(res.accessToken);
-        this.props.navigation.navigate('App');
+        // this.props.navigation.navigate('App');
         // this.props.navigation.navigate('Home');
       })
-      .catch(function(error) {
-      // Handle Errors here.
-      // Handle Errors here.
-      console.log(error.message);
-      // ...
-    });
+      .catch(function (error) {
+        // Handle Errors here.
+        // Handle Errors here.
+        console.log(error.message);
+        // ...
+      });
 
 
 
@@ -53,20 +57,20 @@ export default class LoginScreen extends React.Component {
     let email = this.state.username;
     let password = this.state.password;
 
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
       // Handle Errors here.
       console.log(error.message);
-      
-      
+
+
     });
 
   }
 
-  logout(){
+  logout() {
 
-    firebase.auth().signOut().then(function() {
+    firebase.auth().signOut().then(function () {
       console.log('Sign-out successful.');
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log(error);
     });
   }
@@ -86,16 +90,16 @@ export default class LoginScreen extends React.Component {
           <Form>
             <Item floatingLabel>
               <Label>Username</Label>
-              <Input onChangeText={username => this.setState({username : username })} />
+              <Input onChangeText={username => this.setState({ username: username })} />
             </Item>
             <Item floatingLabel >
               <Label>Password</Label>
-              <Input onChangeText={password => this.setState({password : password })} />
+              <Input onChangeText={password => this.setState({ password: password })} />
             </Item>
-            <Button block  style={styles.buttons} onPress={() => this.logIn()}>
+            <Button block style={styles.buttons} onPress={() => this.logIn()}>
               <Text>Log in</Text>
             </Button>
-            <Button block  style={styles.buttons} onPress={() => this.register()}>
+            <Button block style={styles.buttons} onPress={() => this.register()}>
               <Text>Register</Text>
             </Button>
             <Text>User is {this.state.user}</Text>

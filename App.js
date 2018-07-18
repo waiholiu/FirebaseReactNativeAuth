@@ -17,9 +17,10 @@ var config = {
 };
 
 firebase.initializeApp(config);
-console.log('helloo');
 
 export default class App extends React.Component {
+
+
 
   render() {
     return (
