@@ -28,7 +28,14 @@ export default class HomeScreen extends React.Component {
     });
   }
 
-  
+  logout(){
+
+    firebase.auth().signOut().then(function() {
+      console.log('Sign-out successful.');
+    }).catch(function(error) {
+      console.log(error);
+    });
+  }
 
   render() {
 
@@ -44,7 +51,9 @@ export default class HomeScreen extends React.Component {
         <Content>
           
             <Text>User is {this.state.user}</Text>
-
+            <Button block danger last onPress={() => this.logout()}>
+              <Text>Logout</Text>
+            </Button>
            
         </Content>
       </Container>

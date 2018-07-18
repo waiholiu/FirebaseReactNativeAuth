@@ -5,6 +5,7 @@ import { createStackNavigator } from 'react-navigation';
 
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
+ import createSwitchNavigator from './routing/router';
 
 var config = {
   apiKey: "AIzaSyBwD6srsoYzWSUiZaoNd4HVZHtkc-OG_8w",
@@ -16,30 +17,25 @@ var config = {
 };
 
 firebase.initializeApp(config);
+console.log('helloo');
 
 export default class App extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      password: ""
-    }
-
-  }
 
   render() {
     return (
       
-
-        <AppStackNavigator />
+        <AppSwitchNavigator />
       
     );
   }
 }
 
-const AppStackNavigator = createStackNavigator({
-  Login: LoginScreen,
-  Home : HomeScreen
-})
+// const AppStackNavigator = createStackNavigator({
+//   Login: LoginScreen,
+//   Home : HomeScreen
+// })
+
+console.log(createSwitchNavigator);
+
+const AppSwitchNavigator = createSwitchNavigator;
 

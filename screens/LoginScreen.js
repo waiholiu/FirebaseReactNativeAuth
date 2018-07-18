@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import { Container, Header, Content, Body, Title, Form, Item, Input, Label, Button } from 'native-base';
 
 import * as firebase from "firebase";
@@ -26,13 +26,17 @@ export default class LoginScreen extends React.Component {
     });
   }
 
-  logIn(){
+  async logIn(){
     let email = this.state.username;
     let password = this.state.password;
 
     firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.props.navigation.navigate('Home');
+      .then(async (res) => {
+
+        // console.log(res);
+        // await AsyncStorage.setItem(res.accessToken);
+        this.props.navigation.navigate('App');
+        // this.props.navigation.navigate('Home');
       })
       .catch(function(error) {
       // Handle Errors here.
@@ -40,6 +44,8 @@ export default class LoginScreen extends React.Component {
       console.log(error.message);
       // ...
     });
+
+
 
   }
 
