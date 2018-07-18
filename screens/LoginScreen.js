@@ -15,20 +15,7 @@ export default class LoginScreen extends React.Component {
     }
 
   }
-  componentDidMount() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
 
-        this.setState({ user: user.email });
-      } else {
-        this.setState({ user: null });
-      }
-    });
-  }
-
-  componentWillUnmount() {
-    this.isCancelled = true;
-  }
 
   async logIn() {
     let email = this.state.username;
